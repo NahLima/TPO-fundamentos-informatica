@@ -36,18 +36,16 @@ def upper_text(input, case):
     convertido = ""
 
     for w in input:
-        if case == "lower":
-            if w in upper:
-                index = upper.index(w)
-                convertido += lower[index]
-            else:
-                convertido += w
-        elif case == "upper":
-            if w in lower:
-                index = lower.index(w)
-                convertido += upper[index]
-            else:
-                convertido += w
+        found = False  # Variable para verificar si el caractere fue encontrado
+        for j in range(len(lower)):
+            if case == "lower" and (lower[j] == w or upper[j] == w):
+                convertido += lower[j]
+                found = True
+            elif case == "upper" and (upper[j] == w or lower[j] == w):
+                convertido += upper[j]
+                found = True
+        if not found:
+            convertido += w
 
     return convertido
 
